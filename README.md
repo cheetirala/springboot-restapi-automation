@@ -11,8 +11,8 @@ This repository contains an API automation framework written in Java using:
 - Edge cases: Retrieval of Deleted items
 
 ## Setup
--Java 24
-Maven 3.9+
+- Java 24
+- Maven 3.9+
 
 ## Run locally
 mvn clean test
