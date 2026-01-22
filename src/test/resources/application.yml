@@ -1,0 +1,5 @@
+api:
+  base-url: "https://api.restful-api.dev"
+
+restassured:
+  log-on-failure: true
