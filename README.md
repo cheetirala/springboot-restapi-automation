@@ -1,4 +1,4 @@
-# API automation suite with Spring boot, RestAassured, Cucumber and Java
+# API automation suite with Spring boot, RestAssured, Cucumber and Java
 
 ## Overview 
 This repository contains an API automation framework written in Java using:
