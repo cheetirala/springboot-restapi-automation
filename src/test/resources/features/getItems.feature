@@ -1,6 +1,6 @@
 Feature: Get an item
   Scenario: Ability to return an item
-    Given a "Dell XPS 15" item is created
+    Given an item named "Dell XPS 15"
     And is a "Intel Core i7" CPU model
     And has a price of "1499.00"
     When the request to add the item is made
@@ -11,13 +11,13 @@ Feature: Get an item
     And the retrieved item name is "Dell XPS 15"
 
     Scenario: Ability to return specific items
-      Given a "Dell XPS 15" item is created
+      Given an item named "Dell XPS 15"
       And is a "Intel Core i7 " CPU model
       And has a price of "1499.00"
       When the request to add the item is made
       Then a 200 response code is returned
       And a "Dell XPS 15" is created
-      Given a "Apple MacBook Pro 16" item is created
+      Given an item named "Apple MacBook Pro 16"
       And is a "Intel Core i9" CPU model
       And has a price of "1849.99"
       When the request to add the item is made

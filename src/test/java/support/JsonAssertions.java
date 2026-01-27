@@ -4,8 +4,8 @@ import io.restassured.response.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JSonAssertions {
-    private JSonAssertions(){}
+public class JsonAssertions {
+    private JsonAssertions(){}
 
     public static void assertStatus(Response response, int expected){
         assertNotNull(response, "Response was null");

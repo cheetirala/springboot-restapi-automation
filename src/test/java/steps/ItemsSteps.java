@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import support.JSonAssertions;
+import support.JsonAssertions;
 import support.TestContext;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ObjectsSteps {
+public class ItemsSteps {
 
     private final ItemsClient client;
     private final TestContext testContext;
@@ -27,13 +27,13 @@ public class ObjectsSteps {
     private final Map<String, Object> updatedData = new HashMap<>();
 
     @Autowired
-    public ObjectsSteps(ItemsClient client, TestContext testContext) {
+    public ItemsSteps(ItemsClient client, TestContext testContext) {
         this.client = client;
         this.testContext = testContext;
     }
 
-    @Given("a {string} item is created")
-    public void aItemIsCreate(String itemName) {
+    @Given("an item named {string}")
+    public void anItemsNamed(String itemName) {
         this.name = itemName;
     }
 
@@ -80,16 +80,16 @@ public class ObjectsSteps {
 
     @Then("a {int} response code is returned")
     public void aResponseCodeIsReturned(int status) {
-        JSonAssertions.assertStatus(testContext.getLastResponse(), status);
+        JsonAssertions.assertStatus(testContext.getLastResponse(), status);
     }
 
     @And("a {string} is created")
-    public void AnItemIsCreated(String expectedName) {
-        JSonAssertions.assertJsonNotBlank(testContext.getLastResponse(), "id");
-        JSonAssertions.assertJsonEquals(testContext.getLastResponse(), "name", expectedName);
-        JSonAssertions.assertJsonNotBlank(testContext.getLastResponse(), "createdAt");
-        JSonAssertions.assertJsonEquals(testContext.getLastResponse(), "data.price", createdData.get("price"));
-        JSonAssertions.assertJsonEquals(testContext.getLastResponse(), "data.'CPU model'", createdData.get("CPU model"));
+    public void anItemIsCreated(String expectedName) {
+        JsonAssertions.assertJsonNotBlank(testContext.getLastResponse(), "id");
+        JsonAssertions.assertJsonEquals(testContext.getLastResponse(), "name", expectedName);
+        JsonAssertions.assertJsonNotBlank(testContext.getLastResponse(), "createdAt");
+        JsonAssertions.assertJsonEquals(testContext.getLastResponse(), "data.price", createdData.get("price"));
+        JsonAssertions.assertJsonEquals(testContext.getLastResponse(), "data.'CPU model'", createdData.get("CPU model"));
     }
 
     @When("the created item is retrieved")
@@ -102,7 +102,7 @@ public class ObjectsSteps {
 
     @And("the retrieved item name is {string}")
     public void theRetrievedItemNameIs(String expectedName) {
-        JSonAssertions.assertJsonEquals(testContext.getLastResponse(), "name", expectedName);
+        JsonAssertions.assertJsonEquals(testContext.getLastResponse(), "name", expectedName);
     }
 
     @When("the created item is deleted")
@@ -116,9 +116,9 @@ public class ObjectsSteps {
     @And("the item is updated with name {string}")
     public void theItemIsUpdatedWithName(String expectedName) {
         Response response = testContext.getLastResponse();
-        JSonAssertions.assertJsonEquals(response, "name", expectedName);
-        JSonAssertions.assertJsonEquals(response, "data.'CPU model'", updatedData.get("CPU model"));
-        JSonAssertions.assertJsonEquals(response, "data.price", updatedData.get("price"));
+        JsonAssertions.assertJsonEquals(response, "name", expectedName);
+        JsonAssertions.assertJsonEquals(response, "data.'CPU model'", updatedData.get("CPU model"));
+        JsonAssertions.assertJsonEquals(response, "data.price", updatedData.get("price"));
     }
 
     @When("the created items are retrieved")

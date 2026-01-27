@@ -1,7 +1,7 @@
 Feature: Delete an item
 
   Scenario: Ability to delete an item
-    Given a "Apple MacBook Pro 18" item is created
+    Given an item named "Apple MacBook Pro 18"
     And is a "Intel Core i10" CPU model
     And has a price of "2050.99"
     When the request to add the item is made
