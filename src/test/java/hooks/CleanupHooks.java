@@ -1,16 +1,16 @@
 package hooks;
 
-import clients.ObjectsClient;
+import clients.ItemsClient;
 import io.cucumber.java.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import support.TestContext;
 
 public class CleanupHooks {
-    private final ObjectsClient client;
+    private final ItemsClient client;
     private final TestContext testContext;
 
     @Autowired
-    public CleanupHooks(ObjectsClient client, TestContext state) {
+    public CleanupHooks(ItemsClient client, TestContext state) {
         this.client = client;
         this.testContext = state;
     }
@@ -19,7 +19,7 @@ public class CleanupHooks {
     public void cleanupCreateObjects() {
         for (String id : testContext.getCreatedIds()) {
             try {
-                client.deleteObject(id);
+                client.deleteItem(id);
             } catch (Exception exception) {
                 // ignore
             }

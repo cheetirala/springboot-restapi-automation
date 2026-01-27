@@ -1,6 +1,6 @@
 package config;
 
-import clients.ObjectsClient;
+import clients.ItemsClient;
 import io.cucumber.spring.ScenarioScope;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,8 @@ import support.TestContext;
 public class TestConfig {
 
     @Bean
-    public ObjectsClient objectsClient(ApiProperties properties){
-        return new ObjectsClient(properties.getBaseUrl());
+    public ItemsClient objectsClient(ApiProperties properties){
+        return new ItemsClient(properties.getBaseUrl());
     }
 
     @Bean

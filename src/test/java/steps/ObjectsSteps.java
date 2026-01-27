@@ -1,7 +1,6 @@
 package steps;
 
-import clients.ObjectsClient;
-import io.cucumber.java.PendingException;
+import clients.ItemsClient;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ObjectsSteps {
 
-    private final ObjectsClient client;
+    private final ItemsClient client;
     private final TestContext testContext;
     private String name;
     private String updatedName;
@@ -28,7 +27,7 @@ public class ObjectsSteps {
     private final Map<String, Object> updatedData = new HashMap<>();
 
     @Autowired
-    public ObjectsSteps(ObjectsClient client, TestContext testContext) {
+    public ObjectsSteps(ItemsClient client, TestContext testContext) {
         this.client = client;
         this.testContext = testContext;
     }
@@ -65,7 +64,7 @@ public class ObjectsSteps {
 
     @When("the request to add the item is made")
     public void theRequestToAddTheItemIsMade() {
-        Response response = client.createObject(name, createdData);
+        Response response = client.createItem(name, createdData);
         testContext.setLastResponse(response);
         String id = response.jsonPath().getString("id");
         if (id != null && !id.isBlank()) {
@@ -75,7 +74,7 @@ public class ObjectsSteps {
 
     @When("the request to update the item is made")
     public void theRequestToUpdateTheItemIsMade() {
-        Response response = client.updateObject(testContext.getLastCreatedId(), updatedName, updatedData);
+        Response response = client.updateItem(testContext.getLastCreatedId(), updatedName, updatedData);
         testContext.setLastResponse(response);
     }
 
@@ -98,7 +97,7 @@ public class ObjectsSteps {
         String id = testContext.getLastCreatedId();
         assertNotNull(id,
                 "No created id stored in scenario test context");
-        testContext.setLastResponse(client.getObject(id));
+        testContext.setLastResponse(client.getItem(id));
     }
 
     @And("the retrieved item name is {string}")
@@ -111,7 +110,7 @@ public class ObjectsSteps {
         String id = testContext.getLastCreatedId();
         assertNotNull(id,
                 "No created id stored in scenario test context");
-        testContext.setLastResponse(client.deleteObject(id));
+        testContext.setLastResponse(client.deleteItem(id));
     }
 
     @And("the item is updated with name {string}")
@@ -124,7 +123,7 @@ public class ObjectsSteps {
 
     @When("the created items are retrieved")
     public void theCreatedItemsAreRetrieved() {
-        Response response = client.getObjectsForIds(testContext.getCreatedIds());
+        Response response = client.getItemsForIds(testContext.getCreatedIds());
         testContext.setLastResponse(response);
     }
 
@@ -138,7 +137,7 @@ public class ObjectsSteps {
 
     @When("I retrieve an item with invalid id {string}")
     public void iRetrieveAnItemWithInvalidId(String id) {
-        Response response = client.getObject(id);
+        Response response = client.getItem(id);
         testContext.setLastResponse(response);
     }
 }
