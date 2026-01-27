@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class ScenarioState {
+public class TestContext {
     @Setter
     private Response lastResponse;
     private String lastCreatedId;

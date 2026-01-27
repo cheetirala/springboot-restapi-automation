@@ -3,6 +3,7 @@ package clients;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -33,5 +34,9 @@ public class ObjectsClient {
 
     public Response deleteObject(String id) {
         return given().baseUri(baseUrl).when().delete("/objects/{id}", id).then().extract().response();
+    }
+
+    public Response getObjectsForIds(List<String> ids ) {
+        return given().baseUri(baseUrl).queryParam("id", ids).when().get("/objects").then().extract().response();
     }
 }

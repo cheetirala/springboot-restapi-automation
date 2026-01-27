@@ -5,7 +5,7 @@ import io.cucumber.spring.ScenarioScope;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import support.ScenarioState;
+import support.TestContext;
 
 @Configuration
 @EnableConfigurationProperties(ApiProperties.class)
@@ -18,7 +18,7 @@ public class TestConfig {
 
     @Bean
     @ScenarioScope
-    public ScenarioState scenarioState(){
-        return new ScenarioState();
+    public TestContext testContext(){
+        return new TestContext();
     }
 }

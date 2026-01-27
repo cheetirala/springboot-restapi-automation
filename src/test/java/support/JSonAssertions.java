@@ -12,14 +12,14 @@ public class JSonAssertions {
         assertEquals(expected, response.statusCode(), "Unexpected status. Body=" + response.asString());
     }
 
-    public static void assertJsonEquals(Response response, String jsonPath, Object expected){
-        Object actual = response.jsonPath().get(jsonPath);
-        assertEquals(expected, actual, "JsonPath mismatch at: " + jsonPath + ". Body" + response.asString());
+    public static void assertJsonEquals(Response response, String key, Object expected){
+        Object actual = response.jsonPath().get(key);
+        assertEquals(expected, actual, "JsonPath mismatch at: " + key + ". Body" + response.asString());
     }
 
-    public static void assertJsonNotBlank(Response response, String jsonPath){
-        String value = response.jsonPath().getString(jsonPath);
-        assertNotNull(value, "Expected non-null at: " + jsonPath);
-        assertFalse(value.isBlank(), "Expected non-blank at: " + jsonPath);
+    public static void assertJsonNotBlank(Response response, String key){
+        String value = response.jsonPath().getString(key);
+        assertNotNull(value, "Expected non-null at: " + key);
+        assertFalse(value.isBlank(), "Expected non-blank at: " + key);
     }
 }
